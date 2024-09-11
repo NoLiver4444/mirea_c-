@@ -12,7 +12,21 @@ void quest_4();
 void quest_5();
 
 int main() {
+#ifdef QUEST_1
+    quest_1();
+#endif
+#ifdef QUEST_2
+    quest_2();
+#endif
+#ifdef QUEST_3
+    quest_3();
+#endif
+#ifdef QUEST_4
+    quest_4();
+#endif
+#ifdef QUEST_5
     quest_5();
+#endif
     return 0;
 }
 
