@@ -47,16 +47,20 @@ void quest_2() {
 void quest_3() {
     float b, c;
     cin >> b >> c;
-    if (b == 0) {
+    if (b == 0 && c == 0) {
         cout << "infinite number of solutions" << endl;
+    } else if (b == 0) {
+        cout << "there are no solutions" << endl;
     } else {
         cout << -c / b << endl;
     }
 }
 
 void lin_func(float b, float c) {
-    if (b == 0) {
+    if (b == 0 && c == 0) {
         cout << "infinite number of solutions" << endl;
+    } else if (b == 0) {
+        cout << "there are no solutions" << endl;
     } else {
         cout << -c / b << endl;
     }
