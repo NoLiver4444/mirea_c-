@@ -4,6 +4,9 @@ SRC = prac_1.cpp
 
 all: QUEST_1 QUEST_2 QUEST_3 QUEST_4 QUEST_5
 
+BUILD_DIR_CREATE:
+	mkdir -p build
+
 QUEST_1: CXXFLAGS += -DQUEST_1
 QUEST_1: 
 	$(CXX) $(CXXFLAGS) -o build/QUEST_1 $(SRC) $(BUILD_DIR)
