@@ -1,7 +1,7 @@
-#include <iostream>
-#include <cstdlib>
 #include <cmath>
+#include <cstdlib>
 #include <cstring>
+#include <iostream>
 
 using namespace std;
 
@@ -30,9 +30,7 @@ int main() {
     return 0;
 }
 
-void quest_1() {
-    cout << "Dima" << endl;
-}
+void quest_1() { cout << "Dima" << endl; }
 
 void quest_2() {
     float a, b;
@@ -41,7 +39,8 @@ void quest_2() {
     if (b != 0) {
         cout << " " << a / b << endl;
     } else {
-        cout << " " << "error" << endl;
+        cout << " "
+             << "error" << endl;
     }
 }
 
