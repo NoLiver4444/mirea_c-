@@ -1,0 +1,33 @@
+CXX = g++
+CXXFLAGS = -Wall -Werror -Wextra
+SRC = prac_2.cpp
+
+all: QUEST_1 QUEST_2 QUEST_3 QUEST_4 QUEST_5
+
+BUILD_DIR_CREATE:
+	mkdir -p build
+
+QUEST_1: CXXFLAGS += -DQUEST_1
+QUEST_1: 
+	$(CXX) $(CXXFLAGS) -o build/QUEST_1 $(SRC) $(BUILD_DIR)
+
+QUEST_2: CXXFLAGS += -DQUEST_2
+QUEST_2: 
+	$(CXX) $(CXXFLAGS) -o build/QUEST_2 $(SRC) $(BUILD_DIR)
+
+QUEST_3: CXXFLAGS += -DQUEST_3
+QUEST_3: 
+	$(CXX) $(CXXFLAGS) -o build/QUEST_3 $(SRC) $(BUILD_DIR)
+
+QUEST_4: CXXFLAGS += -DQUEST_4
+QUEST_4: 
+	$(CXX) $(CXXFLAGS) -o build/QUEST_4 $(SRC) $(BUILD_DIR)
+
+QUEST_5: CXXFLAGS += -DQUEST_5
+QUEST_5: 
+	$(CXX) $(CXXFLAGS) -o build/QUEST_5 $(SRC) $(BUILD_DIR)
+
+clean:
+	rm -f build/*.exe
+
+.PHONY: all clean

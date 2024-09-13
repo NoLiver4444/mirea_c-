@@ -11,6 +11,10 @@ void quest_3();
 void quest_4();
 void quest_5();
 
+void lin_func(float b, float c);
+void quad_func(float a, float c);
+void discr(float a, float b, float c);
+
 int main() {
 #ifdef QUEST_1
     quest_1();
