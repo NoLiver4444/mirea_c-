@@ -19,6 +19,8 @@ int existence_trunc_cone(float R, float r, float h, float l);
 float func_make(float x);
 void completion_mas(float x_mas[17], float y_mas[17]);
 void mas_output(float x_mas[17], float y_mas[17], int len);
+void check_vvod(float *per, string text);
+void check_vvod_cel(float *per, string text);
 
 int main() {
 #ifdef QUEST_1
@@ -41,14 +43,11 @@ int main() {
 
 void quest_1() {
     float V, S, R, r, h, l;
-    cout << "R: ";
-    cin >> R;
+    check_vvod(&R, "R: ");
 
-    cout << "r: ";
-    cin >> r;
+    check_vvod(&r, "r: ");
 
-    cout << "h: ";
-    cin >> h;
+    check_vvod(&h, "h: ");
 
     l = sqrt((R - r) * (R - r) + h * h);
 
@@ -63,11 +62,9 @@ void quest_1() {
 
 void quest_2() {
     float x, a;
-    cout << "x: ";
-    cin >> x;
+    check_vvod(&x, "x: ");
 
-    cout << "a: ";
-    cin >> a;
+    check_vvod(&a, "a: ");
 
     if (abs(x) < 1 && x != 0) {
         cout << a * log(abs(x));
@@ -80,14 +77,11 @@ void quest_2() {
 
 void quest_3() {
     float x, y, b;
-    cout << "x: ";
-    cin >> x;
+    check_vvod(&x, "x: ");
 
-    cout << "y: ";
-    cin >> y;
+    check_vvod(&y, "y: ");
 
-    cout << "b: ";
-    cin >> b;
+    check_vvod(&b, "b: ");
 
     if ((b - x) >= 0 && (b - y) > 0) {
         cout << log(b - y) * sqrt(b - x);
@@ -97,22 +91,12 @@ void quest_3() {
 }
 
 void quest_4() {
-    int N;
+    float N;
 
-    cout << "N: ";
-    cin >> N;
+    check_vvod_cel(&N, "N: ");
 
-    while (1) {
-        if (N > 0) {
-            for (int i = N; i < N + 10; i++) {
-                cout << i << " ";
-            }
-            break;
-        } else {
-            cout << N << " not a natural number!" << endl;
-        }
-        cout << "N: ";
-        cin >> N;
+    for (int i = N; i < N + 10; i++) {
+        cout << i << " ";
     }
 }
 
@@ -157,4 +141,30 @@ void mas_output(float x_mas[17], float y_mas[17], int len) {
             cout << std::setw(4) << std::setprecision(2) << y_mas[i] << " | ";
         }
     }
+}
+
+void check_vvod(float *per, string text) {
+    float a;
+    cout << text;
+    cin >> a;
+    while (cin.fail()) {
+        cin.clear();
+        cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        cout << text;
+        cin >> a;
+    }
+    *per = a;
+}
+
+void check_vvod_cel(float *per, string text) {
+    float a;
+    cout << text;
+    cin >> a;
+    while (cin.fail() || a - (int)a != 0 || a < 0) {
+        cin.clear();
+        cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        cout << text;
+        cin >> a;
+    }
+    *per = a;
 }
