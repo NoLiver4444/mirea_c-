@@ -7,6 +7,7 @@
 
 using namespace std;
 
+//Прототипы функций
 void quest_2();
 double monthly_payment(double S, double n, double r);
 void check_vvod(double *per, string text);
@@ -17,13 +18,17 @@ int main() {
 }
 
 void quest_2() {
+    //Инициализация переменных
     double S, m, n, r = 0.0001, m_temp = 0;
 
+    //Проверка ввода
     check_vvod(&S, "S: ");
     check_vvod(&m, "m: ");
     check_vvod(&n, "n: ");
 
+    //Расчёт процентов
     while (m_temp <= m) {
+        //Расчёт месячной выплаты
         m_temp = monthly_payment(S, n, r);
         if (m_temp == m) {
             break;
@@ -34,6 +39,7 @@ void quest_2() {
     cout << r * 100;
 }
 
+//Функция для расчёта месячной выплаты
 double monthly_payment(double S, double n, double r) {
     if ((pow(1 + r, n) - 1) != 0) {
         return (S * r * pow(1 + r, n)) / (12.0 * (pow(1 + r, n) - 1));
@@ -42,6 +48,7 @@ double monthly_payment(double S, double n, double r) {
     }
 }
 
+//Функция для проверка ввода
 void check_vvod(double *per, string text) {
     double a;
     cout << text;

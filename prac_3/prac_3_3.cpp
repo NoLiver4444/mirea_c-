@@ -3,6 +3,7 @@
 
 using namespace std;
 
+//Прототипы функций
 void quest_3();
 void output_file(ifstream &in);
 
@@ -15,12 +16,15 @@ int main() {
 void quest_3() {
     string file;
 
+    //Ввод названия файла
     cout << "file: ";
     cin >> file;
 
     ifstream in(file);
 
+    //Проверка открытия файла
     if (in.is_open()) {
+        //Вывод файла
         output_file(in);
         in.close();
     } else {
@@ -28,6 +32,7 @@ void quest_3() {
     }
 }
 
+//Функция для вывод файла
 void output_file(ifstream &in) {
     string line;
     while (getline(in, line)) {

@@ -4,6 +4,7 @@
 
 using namespace std;
 
+//Прототипы функций
 void quest_4();
 void input_file(ofstream &MyFile);
 void output_file(ifstream &MyFile);
@@ -17,21 +18,26 @@ int main() {
 void quest_4() {
     string file;
 
+    //Ввод названия файла
     cout << "file: ";
     cin >> file;
 
     ofstream MyFile(file);
 
+    //Проверка открытия файла
     if (MyFile.is_open()) {
+        //Записываем значения в файл
         input_file(MyFile);
         MyFile.close();
         ifstream MyFile(file);
+        //Вывод файла
         output_file(MyFile);
     } else {
         cout << "error\n";
     }
 }
 
+//Функция для ввода знайчений в файла
 void input_file(ofstream &MyFile) {
     string line;
     cout << "press ! to end\n";
@@ -43,6 +49,7 @@ void input_file(ofstream &MyFile) {
     }
 }
 
+//Функция для вывод файла
 void output_file(ifstream &MyFile) {
     char line[30];
     while (MyFile.getline(line, 30)) {
