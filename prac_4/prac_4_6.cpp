@@ -1,58 +1,47 @@
-#define _USE_MATH_DEFINES
-#include <cmath>
-#include <cstdlib>
-#include <cstring>
-#include <fstream>
-#include <iomanip>
 #include <iostream>
+#include <string>
+#include <unordered_map>
 
 using namespace std;
 
+int romanToInt(const string &s);
 void quest_6();
 
 int main() {
     setlocale(LC_ALL, "rus");
     quest_6();
+
     return 0;
 }
 
 void quest_6() {
-    string vvod;
-    int answ;
-    float prior;
+    string roman;
 
-    cin >> vvod;
+    cout << "Введите римскую цифру: ";
+    cin >> roman;
 
-    for (int i = 0; i < sizeof(vvod); i++) {
-        
-    }
+    int arabic = romanToInt(roman);
+    cout << "Арабское число: " << arabic << std::endl;
 }
 
-float prior(char number) {
-    float prior;
-    switch (number) {
-        case 'I':
-            prior = 0.2;
-            break;
-        case 'V':
-            prior = 1;
-            break;
-        case 'X':
-            prior = 2;
-            break;
-        case 'L':
-            prior = 10;
-            break;
-        case 'C':
-            prior = 20;
-            break;
-        case 'D':
-            prior = 100;
-            break;
-        case 'M':
-            prior = 200;
-            break;
+int romanToInt(const string &s) {
+    unordered_map<char, int> romanMap = {{'I', 1},   {'V', 5},   {'X', 10},  {'L', 50},
+                                         {'C', 100}, {'D', 500}, {'M', 1000}};
 
-            return prior;
+    int total = 0;
+    int prevValue = 0;
+
+    for (char c : s) {
+        int currentValue = romanMap[c];
+
+        if (currentValue > prevValue) {
+            total += currentValue - 2 * prevValue;
+        } else {
+            total += currentValue;
+        }
+
+        prevValue = currentValue;
     }
+
+    return total;
 }

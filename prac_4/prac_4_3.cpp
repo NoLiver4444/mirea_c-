@@ -2,8 +2,8 @@
 #include <cmath>
 #include <cstdlib>
 #include <cstring>
-#include <iomanip>
 #include <fstream>
+#include <iomanip>
 #include <iostream>
 
 using namespace std;
@@ -26,17 +26,16 @@ void quest_3() {
     cout << "Rectangle - 1\nTriangle  - 2\nCircle    - 3\npress -1 to stop\n";
     cin >> choose;
     while (choose != -1) {
-        switch (choose)
-        {
-        case 1:
-            Rectangle();
-            break;
-        case 2:
-            Triangle();
-            break;
-        case 3:
-            Circle();
-            break;
+        switch (choose) {
+            case 1:
+                Rectangle();
+                break;
+            case 2:
+                Triangle();
+                break;
+            case 3:
+                Circle();
+                break;
         }
         cin >> choose;
     }

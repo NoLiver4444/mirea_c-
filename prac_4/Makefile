@@ -1,7 +1,7 @@
 CXX = g++
 CXXFLAGS = -Wall -Werror -Wextra
 
-all: QUEST_1 QUEST_2 QUEST_3 QUEST_4 QUEST_5 QUEST_6
+all: QUEST_1 QUEST_2 QUEST_3 QUEST_4 QUEST_5 QUEST_6 QUEST_7 QUEST_8 QUEST_9
 
 BUILD_DIR_CREATE:
 	mkdir -p build
@@ -23,6 +23,15 @@ QUEST_5:
 
 QUEST_6: 
 	$(CXX) $(CXXFLAGS) -o build/QUEST_6 prac_4_6.cpp $(BUILD_DIR)
+
+QUEST_7: 
+	$(CXX) $(CXXFLAGS) -o build/QUEST_7 prac_4_7.cpp $(BUILD_DIR)
+
+QUEST_8: 
+	$(CXX) $(CXXFLAGS) -o build/QUEST_8 prac_4_8.cpp $(BUILD_DIR)
+
+QUEST_9: 
+	$(CXX) $(CXXFLAGS) -o build/QUEST_9 prac_4_9.cpp $(BUILD_DIR)
 
 clean:
 	rm -f build/*.exe

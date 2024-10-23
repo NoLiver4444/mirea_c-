@@ -2,8 +2,8 @@
 #include <cmath>
 #include <cstdlib>
 #include <cstring>
-#include <iomanip>
 #include <fstream>
+#include <iomanip>
 #include <iostream>
 
 using namespace std;
@@ -13,7 +13,6 @@ void quest_1();
 void input_file(ofstream &MyFile);
 int sum_found(ifstream &MyFile);
 void check_vvod(int *per, string text);
-
 
 int main() {
     setlocale(LC_ALL, "rus");

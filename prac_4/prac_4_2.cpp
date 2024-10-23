@@ -2,8 +2,8 @@
 #include <cmath>
 #include <cstdlib>
 #include <cstring>
-#include <iomanip>
 #include <fstream>
+#include <iomanip>
 #include <iostream>
 
 using namespace std;
@@ -12,7 +12,6 @@ using namespace std;
 void quest_2();
 int check_znak(double number);
 void check_vvod(double *per, string text);
-
 
 int main() {
     setlocale(LC_ALL, "rus");
