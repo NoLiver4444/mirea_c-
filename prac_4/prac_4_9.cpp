@@ -1,122 +1,77 @@
-#include <math.h>
 #include <iostream>
 #include <string>
-#include <unordered_map>
+#include <cmath>
+#include <algorithm>
 
 using namespace std;
 
-void quest_9();
-int first(int before, string number);
-int second(int after, string number);
-int translation(char a);
+int charToValue(char c);
+char valueToChar(int value);
+long long convertToDecimal(const string &number, int base);
+string convertFromDecimal(long long number, int base);
 
 int main() {
-    setlocale(LC_ALL, "rus");
-    quest_9();
+    string number;
+    int oldBase, newBase;
+
+    cout << "input number: ";
+    cin >> number;
+    cout << "old foundation (2-16): ";
+    cin >> oldBase;
+    cout << "new foundation (2-16): ";
+    cin >> newBase;
+
+    try {
+        long long decimalValue = convertToDecimal(number, oldBase);
+        string newNumber = convertFromDecimal(decimalValue, newBase);
+        cout << "answer: " << newNumber << endl;
+    } catch (const invalid_argument& e) {
+        cerr << e.what() << endl;
+    }
 
     return 0;
 }
 
-void quest_9() {
-    int before, after;
-    string number;
-    cout << "initial basis: ";
-    cin >> before;
-    cout << "\ninput number: ";
-    cin >> number;
-    cout << "\nfinal basis: ";
-    cin >> after;
-    if (after == 10) {
-        cout << first(before, number);
-    } else if (before == 10) {
-        cout << second(after, number);
-    } else {
-        int numb = first(before, number), count = 0, answ = 0;
-        while (numb > 0) {
-            answ = (numb % after) * pow(10, count) + answ;
-            count++;
-            numb = numb / after;
+int charToValue(char c) {
+    if (c >= '0' && c <= '9') {
+        return c - '0';
+    } else if (c >= 'A' && c <= 'F') {
+        return c - 'A' + 10;
+    } else if (c >= 'a' && c <= 'f') {
+        return c - 'a' + 10;
+    }
+    return -1; // Неверный символ
+}
+
+char valueToChar(int value) {
+    if (value >= 0 && value <= 9) {
+        return '0' + value;
+    } else if (value >= 10 && value <= 15) {
+        return 'A' + (value - 10);
+    }
+    return '?'; // Неверное значение
+}
+
+long long convertToDecimal(const string &number, int base) {
+    long long result = 0;
+    for (size_t i = 0; i < number.size(); ++i) {
+        int value = charToValue(number[number.size() - 1 - i]);
+        if (value < 0 || value >= base) {
+            throw invalid_argument("Неверный символ для данной системы счисления");
         }
-        cout << answ;
+        result += value * pow(base, i);
     }
+    return result;
 }
 
-int first(int before, string number) {
-    int len = number.length() - 1, l = number.length();
-    int answ = 0, numb;
-    for (int i = 0; i < l; i++) {
-        numb = translation(number[i]);
-        answ += numb * pow(before, len);
-        len--;
+string convertFromDecimal(long long number, int base) {
+    if (number == 0) return "0";
+    
+    string result;
+    while (number > 0) {
+        result += valueToChar(number % base);
+        number /= base;
     }
-    return answ;
-}
-
-int second(int after, string number) {
-    int len = number.length() - 1, l = number.length(), numb = 0, answ = 0, count = 0;
-    for (int i = 0; i < l; i++) {
-        numb += translation(number[i]) * pow(10, len);
-        len--;
-    }
-    while (numb > 0) {
-        answ = (numb % after) * pow(10, count) + answ;
-        count++;
-        numb = numb / after;
-    }
-    return answ;
-}
-
-int translation(char a) {
-    int answ;
-    switch (a) {
-        case '0':
-            answ = 0;
-            break;
-        case '1':
-            answ = 1;
-            break;
-        case '2':
-            answ = 2;
-            break;
-        case '3':
-            answ = 3;
-            break;
-        case '4':
-            answ = 4;
-            break;
-        case '5':
-            answ = 5;
-            break;
-        case '6':
-            answ = 6;
-            break;
-        case '7':
-            answ = 7;
-            break;
-        case '8':
-            answ = 8;
-            break;
-        case '9':
-            answ = 9;
-            break;
-        case 'A':
-            answ = 10;
-            break;
-        case 'B':
-            answ = 11;
-            break;
-        case 'C':
-            answ = 12;
-            break;
-        case 'D':
-            answ = 13;
-            break;
-        case 'E':
-            answ = 14;
-            break;
-        case 'F':
-            answ = 15;
-            break;
-    }
-    return answ;
+    reverse(result.begin(), result.end());
+    return result;
 }
