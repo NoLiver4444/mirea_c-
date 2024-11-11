@@ -21,7 +21,6 @@ int main() {
         count_char(MyFile, charCount);
         max_count(charCount);
         MyFile.close();
-        ifstream MyFile(file);
     } else {
         cout << "error\n";
     }

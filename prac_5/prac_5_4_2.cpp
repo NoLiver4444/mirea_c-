@@ -1,93 +1,81 @@
 #include <iostream>
-#include <fstream>
+#include <string>
+#include <cmath>
+#include <algorithm>
 
 using namespace std;
 
-int first(int before, string number);
-int second(int after, string number);
-int translation(char a);
+int charToValue(char c);
+char valueToChar(int value);
+long long convertToDecimal(const string &number, int base);
+string convertFromDecimal(long long number, int base);
+void output_answ(string *b, int n);
 
 int main() {
-    
+    int oldBase = 7, newBase = 3, n;
+
+    cout << "input n: ";
+    cin >> n;
+    string *a = new string[n], *b = new string[n];
+    for (int i = 0; i < n; i++) {
+        cin >> a[i];
+    }
+    for (int i = 0; i < n; i++) {
+        long long decimalValue = convertToDecimal(a[i], oldBase);
+        string newNumber = convertFromDecimal(decimalValue, newBase);
+        b[i] = newNumber;
+    }
+    output_answ(b, n);
+
     return 0;
 }
 
-int first(int before, string number) {
-    int len = number.length() - 1, l = number.length();
-    int answ = 0, numb;
-    for (int i = 0; i < l; i++) {
-        numb = translation(number[i]);
-        answ += numb * pow(before, len);
-        len--;
+int charToValue(char c) {
+    if (c >= '0' && c <= '9') {
+        return c - '0';
+    } else if (c >= 'A' && c <= 'F') {
+        return c - 'A' + 10;
+    } else if (c >= 'a' && c <= 'f') {
+        return c - 'a' + 10;
     }
-    return answ;
+    return -1; // Неверный символ
 }
 
-int second(int after, string number) {
-    int len = number.length() - 1, l = number.length(), numb = 0, answ = 0, count = 0;
-    for (int i = 0; i < l; i++) {
-        numb += translation(number[i]) * pow(10, len);
-        len--;
+char valueToChar(int value) {
+    if (value >= 0 && value <= 9) {
+        return '0' + value;
+    } else if (value >= 10 && value <= 15) {
+        return 'A' + (value - 10);
     }
-    while (numb > 0) {
-        answ = (numb % after) * pow(10, count) + answ;
-        count++;
-        numb = numb / after;
-    }
-    return answ;
+    return '?'; // Неверное значение
 }
 
-int translation(char a) {
-    int answ;
-    switch (a) {
-        case '0':
-            answ = 0;
-            break;
-        case '1':
-            answ = 1;
-            break;
-        case '2':
-            answ = 2;
-            break;
-        case '3':
-            answ = 3;
-            break;
-        case '4':
-            answ = 4;
-            break;
-        case '5':
-            answ = 5;
-            break;
-        case '6':
-            answ = 6;
-            break;
-        case '7':
-            answ = 7;
-            break;
-        case '8':
-            answ = 8;
-            break;
-        case '9':
-            answ = 9;
-            break;
-        case 'A':
-            answ = 10;
-            break;
-        case 'B':
-            answ = 11;
-            break;
-        case 'C':
-            answ = 12;
-            break;
-        case 'D':
-            answ = 13;
-            break;
-        case 'E':
-            answ = 14;
-            break;
-        case 'F':
-            answ = 15;
-            break;
+long long convertToDecimal(const string &number, int base) {
+    long long result = 0;
+    for (size_t i = 0; i < number.size(); ++i) {
+        int value = charToValue(number[number.size() - 1 - i]);
+        if (value < 0 || value >= base) {
+            throw invalid_argument("Неверный символ для данной системы счисления");
+        }
+        result += value * pow(base, i);
     }
-    return answ;
+    return result;
+}
+
+string convertFromDecimal(long long number, int base) {
+    if (number == 0) return "0";
+    
+    string result;
+    while (number > 0) {
+        result += valueToChar(number % base);
+        number /= base;
+    }
+    reverse(result.begin(), result.end());
+    return result;
+}
+
+void output_answ(string *b, int n) {
+    for (int i = 0; i < n; i++) {
+        cout << b[i] << " ";
+    }
 }
